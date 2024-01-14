@@ -5,7 +5,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "npm install && npm run migrate && npm run build",
+    "build": "npm install",
     "test": "jest"
   }
 }
