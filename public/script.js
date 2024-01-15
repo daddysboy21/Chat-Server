@@ -45,14 +45,20 @@ window.onload = function() {
         renderMessage("update",update);
     });
 
+    socket.on("previousMessages", function (previousMessages) {
+        console.log("Previous messages:", previousMessages);
+    });
+    
     socket.on("chat",function(message){
+        console.log("New message:", message);
         renderMessage("other",message);
     });
     socket.on("playMessageSound", function(){
         messageSound.play();
+        console.log("Message sound played")
     });
 
-    const messageSound = new Audio('public\mixkit-elevator-tone-2863.wav');
+    const messageSound = new Audio('https://them-boyz-chatroom-server.onrender.com/mixkit-elevator-tone-2863.wav');
 
     function renderMessage(type, message){
         let messageContainer = app.querySelector(".chat-screen .messages");

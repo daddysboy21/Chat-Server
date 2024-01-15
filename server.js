@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
   function trimMessages() {
     while (messages.length > maxMessages) {
-        messages.shift(); // Remove the oldest message
+        messages.shift();
     }
 }
   function cleanUpMessages() {
@@ -48,6 +48,7 @@ io.on("connection", function(socket){
         message.timestamp = new Date().getTime();
         messages.push(message);
         trimMessages();
+        console.log("Updated messages:", messages);
         socket.broadcast.emit("chat", message);
         socket.broadcast.emit("playMessageSound");
     });
