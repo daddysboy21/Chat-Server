@@ -9,7 +9,7 @@ const io = require("socket.io")(server, {
     path: "/socket",
 });
 
-app.use(express.static(path.join(__dirname + "public")));
+app.use(express.static(path.join(__dirname, "public")));
 app.use('/files', express.static(path.join(__dirname, "ChatBox" )));
 
 app.get('/', (req, res) => {
