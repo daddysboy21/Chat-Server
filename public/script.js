@@ -49,6 +49,8 @@ window.onload = function() {
         renderMessage("other",message);
     });
 
+    const messageSound = new Audio('mixkit-elevator-tone-2863.wav');
+
     function renderMessage(type, message){
         let messageContainer = app.querySelector(".chat-screen .messages");
         if(type == "my"){
@@ -71,6 +73,7 @@ window.onload = function() {
                 </div>
             `;
             messageContainer.appendChild(el);
+            messageSound.play();
         } else if(type == "update"){
             let el = document.createElement("div");
             el.setAttribute("class", "update");
