@@ -48,6 +48,9 @@ window.onload = function() {
     socket.on("chat",function(message){
         renderMessage("other",message);
     });
+    socket.on("playMessageSound", function(){
+        messageSound.play();
+    });
 
     const messageSound = new Audio('mixkit-elevator-tone-2863.wav');
 
@@ -79,6 +82,7 @@ window.onload = function() {
             el.setAttribute("class", "update");
             el.innerText = message;
             messageContainer.appendChild(el);
+            messageSound.play();
         }
         messageContainer.scrollTop = messageContainer.scrollHeight - messageContainer.clientHeight;
     }
