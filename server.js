@@ -12,6 +12,10 @@ const io = require("socket.io")(server, {
 app.use(express.static(path.join(__dirname + "public")));
 app.use('/files', express.static(path.join(__dirname, "ChatBox" )));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+
 io.on("connection", function(socket){
     socket.on("newuser", function(username){
         socket.broadcast.emit("update", " " + username + " joined the conversation");
