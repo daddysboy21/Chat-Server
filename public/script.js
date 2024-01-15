@@ -52,7 +52,7 @@ window.onload = function() {
         messageSound.play();
     });
 
-    const messageSound = new Audio('mixkit-elevator-tone-2863.wav');
+    const messageSound = new Audio('public\mixkit-elevator-tone-2863.wav');
 
     function renderMessage(type, message){
         let messageContainer = app.querySelector(".chat-screen .messages");
