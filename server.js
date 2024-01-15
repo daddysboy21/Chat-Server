@@ -34,8 +34,10 @@ app.get('/', (req, res) => {
   setInterval(cleanUpMessages, 60 * 60 * 1000);
 
 io.on("connection", function(socket){
-    socket.emit("previousMessages", messages);
-
+    socket.on("connection", function (socket) {
+        socket.emit("previousMessages", messages);
+    });
+    
     socket.on("newuser", function(username){
         socket.broadcast.emit("update", " " + username + " joined the conversation");
     });

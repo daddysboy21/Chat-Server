@@ -47,6 +47,7 @@ window.onload = function() {
 
     socket.on("previousMessages", function (previousMessages) {
         console.log("Previous messages:", previousMessages);
+        previousMessages.forEach((message) => renderMessage("other", message));
     });
     
     socket.on("chat",function(message){
