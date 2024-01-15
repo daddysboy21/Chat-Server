@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 5500;
 const http = require("http");
-const socketIo = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
@@ -17,8 +16,14 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
 
+  const maxMessages = 500
   const messages = [];
 
+  function trimMessages() {
+    while (messages.length > maxMessages) {
+        messages.shift(); // Remove the oldest message
+    }
+}
   function cleanUpMessages() {
     const now = new Date().getTime();
     const twentyFourHoursAgo = now - 24 * 60 * 60 * 1000;
@@ -42,6 +47,7 @@ io.on("connection", function(socket){
     socket.on("chat", function(message){
         message.timestamp = new Date().getTime();
         messages.push(message);
+        trimMessages();
         socket.broadcast.emit("chat", message);
         socket.broadcast.emit("playMessageSound");
     });
