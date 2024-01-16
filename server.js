@@ -11,8 +11,6 @@ const io = require("socket.io")(server, {
     path: "/socket",
 });
 
-const users = [];
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/files', express.static(path.join(__dirname, "Chat-Server" )));
@@ -38,8 +36,8 @@ app.post('/submit', (req, res) => {
     const mailOptions = {
         from: 'morristoclo@gmail.com',
         to: 'morristoclo@gmail.com',
-        subject: 'New Form Submission',
-        text: `Name: ${username}\n Mobile: ${mobile}`,
+        subject: 'New Contact Just Joined THEM BOYZ CHATROOM',
+        text: `Name: ${username}\nMobile: ${mobile}`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -48,8 +46,6 @@ app.post('/submit', (req, res) => {
         }
 
         console.log('Email sent:', info.response);
-
-        users.push({ username, mobile });
 
         deleteUserData(username, mobile);
 
