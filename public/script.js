@@ -4,6 +4,8 @@ window.onload = function() {
     document.getElementById('join-user').addEventListener('click', function() {
         const username = document.getElementById('username').value;
         const mobile = document.getElementById('mobile').value;
+
+        console.log('Captured values - Username:', username, ' Mobile:', mobile);
     
         fetch('/submit', {
             method: 'POST',
