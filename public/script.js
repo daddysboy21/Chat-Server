@@ -59,7 +59,7 @@ window.onload = function() {
         console.log("Message sound played")
     });
 
-    const messageSound = new Audio('https://them-boyz-chatroom-server.onrender.com/mixkit-elevator-tone-2863.wav');
+    const messageSound = new Audio('https://them-boyz-chatroom-server.onrender.com/hey.mp3');
 
     function renderMessage(type, message){
         let messageContainer = app.querySelector(".chat-screen .messages");
