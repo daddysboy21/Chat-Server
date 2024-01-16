@@ -144,3 +144,9 @@ body {
     border: none;
     cursor: pointer;
 }
+input{
+    border-radius: 50px;
+}
+.form-input button{
+        border-radius: 10px;
+}
