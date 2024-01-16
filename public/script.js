@@ -1,11 +1,30 @@
 window.onload = function() {
 (function(){
- 
+
+    document.getElementById('join-user').addEventListener('click', function() {
+        const username = document.getElementById('username').value;
+        const mobile = document.getElementById('mobile').value;
+
+        fetch('/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `name=${encodeURIComponent(username)}&mobile=${encodeURIComponent(mobile)}`,
+        })
+        .then(response => response.text())
+        .then(responseText => {
+          console.log(responseText);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+
     const app = document.querySelector(".app");
     const socket = io('https://them-boyz-chatroom-server.onrender.com', {
         path: '/socket',
     });
-
 
     let uname;
 

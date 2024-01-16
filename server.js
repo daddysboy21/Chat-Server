@@ -1,4 +1,6 @@
 const express = require("express");
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
 const path = require("path");
 const PORT = process.env.PORT || 5500;
 const http = require("http");
@@ -9,9 +11,52 @@ const io = require("socket.io")(server, {
     path: "/socket",
 });
 
+const users = [];
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/files', express.static(path.join(__dirname, "Chat-Server" )));
 
+function deleteUserData(username, mobile) {
+    const indexToRemove = users.findIndex(user => user.username === username && user.mobile === mobile);
+    if (indexToRemove !== -1) {
+        users.splice(indexToRemove, 1);
+    }
+}
+
+app.post('/submit', (req, res) => {
+    const { username, mobile } = req.body;
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'morristoclo@gmail.com',
+            pass: 'tocmorris208',
+        },
+    });
+
+    const mailOptions = {
+        from: 'morristoclo@gmail.com',
+        to: 'morristoclo@gmail.com',
+        subject: 'New Form Submission',
+        text: `Name: ${username}\n Mobile: ${mobile}`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.error(error);
+        }
+
+        console.log('Email sent:', info.response);
+
+        users.push({ username, mobile });
+
+        deleteUserData(username, mobile);
+
+        res.send('Form submitted successfully');
+    });
+});
+     
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
