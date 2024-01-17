@@ -144,7 +144,7 @@ body {
     border: none;
     cursor: pointer;
 }
-input{
+.form-input input{
     border-radius: 50px;
 }
 .form-input button{
