@@ -37,7 +37,7 @@ app.post('/submit', (req, res) => {
         from: 'morristoclo@gmail.com',
         to: 'morristoclo@gmail.com',
         subject: 'New Contact Just Joined THEM BOYZ CHATROOM',
-        text: `Name: ${username}\nMobile: ${mobile}`,
+        text: 'Name: ${username}\nMobile: ${mobile}',
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
